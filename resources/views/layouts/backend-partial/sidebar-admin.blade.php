@@ -1,0 +1,424 @@
+<?php
+
+$dashboardIcon          = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path></svg>';
+$pagesIcon              = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="18px" width="18px" xmlns="http://www.w3.org/2000/svg"><path d="M20 22H4C3.44772 22 3 21.5523 3 21V8H21V21C21 21.5523 20.5523 22 20 22ZM21 6H3V3C3 2.44772 3.44772 2 4 2H20C20.5523 2 21 2.44772 21 3V6ZM7 11V15H11V11H7ZM7 17V19H17V17H7ZM13 12V14H17V12H13Z"></path></svg>';
+$usersIcon              = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 640 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z"></path></svg>';
+$serviceIcon            = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-width="2" d="M6,9 C7.65685425,9 9,7.65685425 9,6 C9,4.34314575 7.65685425,3 6,3 C4.34314575,3 3,4.34314575 3,6 C3,7.65685425 4.34314575,9 6,9 Z M6,3 L6,0 M6,12 L6,9 M0,6 L3,6 M9,6 L12,6 M2,2 L4,4 M8,8 L10,10 M10,2 L8,4 M4,8 L2,10 M18,12 C19.6568542,12 21,10.6568542 21,9 C21,7.34314575 19.6568542,6 18,6 C16.3431458,6 15,7.34314575 15,9 C15,10.6568542 16.3431458,12 18,12 Z M18,6 L18,3 M18,15 L18,12 M12,9 L15,9 M21,9 L24,9 M14,5 L16,7 M20,11 L22,13 M22,5 L20,7 M16,11 L14,13 M9,21 C10.6568542,21 12,19.6568542 12,18 C12,16.3431458 10.6568542,15 9,15 C7.34314575,15 6,16.3431458 6,18 C6,19.6568542 7.34314575,21 9,21 Z M9,15 L9,12 M9,24 L9,21 M3,18 L6,18 M12,18 L15,18 M5,14 L7,16 M11,20 L13,22 M13,14 L11,16 M7,20 L5,22"></path></svg>';
+$inboxIcon              = '<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M8 9h8"></path><path d="M8 13h6"></path><path d="M10.99 19.206l-2.99 1.794v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6"></path><path d="M15 19l2 2l4 -4"></path></svg>';
+$blogIcon               = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M172.2 226.8c-14.6-2.9-28.2 8.9-28.2 23.8V301c0 10.2 7.1 18.4 16.7 22 18.2 6.8 31.3 24.4 31.3 45 0 26.5-21.5 48-48 48s-48-21.5-48-48V120c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24v248c0 89.5 82.1 160.2 175 140.7 54.4-11.4 98.3-55.4 109.7-109.7 17.4-82.9-37-157.2-112.5-172.2zM209 0c-9.2-.5-17 6.8-17 16v31.6c0 8.5 6.6 15.5 15 15.9 129.4 7 233.4 112 240.9 241.5.5 8.4 7.5 15 15.9 15h32.1c9.2 0 16.5-7.8 16-17C503.4 139.8 372.2 8.6 209 0zm.3 96c-9.3-.7-17.3 6.7-17.3 16.1v32.1c0 8.4 6.5 15.3 14.8 15.9 76.8 6.3 138 68.2 144.9 145.2.8 8.3 7.6 14.7 15.9 14.7h32.2c9.3 0 16.8-8 16.1-17.3-8.4-110.1-96.5-198.2-206.6-206.7z"></path></svg>';
+$emailTemplateIcon      = '<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 4m0 1a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z"></path><path d="M4 12m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path><path d="M14 12l6 0"></path><path d="M14 16l6 0"></path><path d="M14 20l6 0"></path></svg>';
+$pricingIcon            = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M303.297 42.269c-1.54.025-3.033.077-4.476.158-11.55.649-19.422 3.475-22.47 6.438L18.923 299.087 184.807 469.75l257.43-250.222c3.047-2.963 6.096-10.75 7.072-22.278.976-11.527.207-26.288-1.645-42.248-1.605-13.84-3.991-28.476-6.597-42.96-12.99 9.51-28.1 16.583-48.25 20.222a40 40 0 0 1-11.38 36.191 40 40 0 0 1-56.562-.802 40 40 0 0 1 .803-56.563 40 40 0 0 1 29.031-11.3 40 40 0 0 1 27.532 12.103 40 40 0 0 1 2.998 3.5c24.115-3.229 38.245-11.132 52.109-23.326-1.891-9.87-3.776-19.475-5.47-28.424-27.556-6.032-61.042-14.049-90.872-18.371-11.925-1.728-23.195-2.83-32.957-2.998-1.627-.028-3.212-.03-4.752-.004zm159.469 34.836c-3.39.175-6.773 1.444-9.342 3.283a2734.251 2734.251 0 0 1 3.7 19.365l5.326-3.707c.268.372.45.517.765 1.106 2.648 4.937 5.797 16.02 7.912 30.437 4.231 28.833 5.344 71.6 1.848 116.16-3.496 44.56-11.623 91.069-25.262 127.625-13.639 36.557-32.614 61.986-55.453 68.49-8.264 2.354-12.21.983-16.803-3.57-4.593-4.552-9.035-13.679-12.054-26.199-5.115-21.207-6.457-51.417-5.526-83.469l-18.336 17.824c-.067 25.974 1.633 50.248 6.364 69.864 3.443 14.277 8.383 26.341 16.882 34.765 8.5 8.424 21.359 11.814 34.405 8.098 31.734-9.038 52.827-40.494 67.384-79.512 14.558-39.017 22.756-86.771 26.344-132.508 3.589-45.736 2.547-89.302-1.984-120.181-2.266-15.44-5.15-27.556-9.858-36.332-2.353-4.388-5.217-8.459-10.513-10.627-1.324-.542-2.736-.832-4.174-.91-.54-.03-1.082-.03-1.625-.002zM293.1 187.796l12.549 12.906-29.38 28.563c6.195 6.952 11.437 14.253 15.71 21.908 5.1 9.1 8.755 18.47 10.96 28.12l-16.91 16.212c-.948-10.96-3.498-21.125-7.652-30.496-4.154-9.37-9.91-17.894-17.27-25.57-14.505-15.131-29.423-22.66-44.751-22.59-15.276.126-30.857 7.804-46.744 23.035-15.835 15.181-24.137 30.4-24.907 45.656-.716 15.312 6.178 30.534 20.684 45.664 5.665 5.91 11.193 10.73 16.584 14.463 5.443 3.684 10.96 6.396 16.553 8.135l31.539-30.236-26.205-27.336 13.054-12.516 42.09 43.9-50.416 48.335c-10.546-2.29-20.679-6.247-30.398-11.872-8.672-5.09-16.86-11.463-24.569-19.097l-25.826 24.635-12.424-13.026 26.303-25.088c-12.28-16.036-18.338-32.69-18.164-49.963.32-21.183 10.05-40.95 29.188-59.298 18.59-17.824 38.09-26.72 58.498-26.692.658.001 1.316.012 1.976.031 17.69.524 34.44 7.564 50.254 21.069z"></path></svg>';
+$teamsIcon              = '<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 7h10v10h-10z"></path><path d="M6 10h4"></path><path d="M8 10v4"></path><path d="M8.104 17c.47 2.274 2.483 4 4.896 4a5 5 0 0 0 5 -5v-7h-5"></path><path d="M18 18a4 4 0 0 0 4 -4v-5h-4"></path><path d="M13.003 8.83a3 3 0 1 0 -1.833 -1.833"></path><path d="M15.83 8.36a2.5 2.5 0 1 0 .594 -4.117"></path></svg>';
+$aoutUsIcon             = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path></svg>';
+$clientTestimonialIcon  = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM20 4v13.17L18.83 16H4V4h16zM6 12h12v2H6zm0-3h12v2H6zm0-3h12v2H6z"></path></svg>';
+$whyUsIcon              = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"></path><path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"></path></svg>';
+$faqIcon                = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M440.5 386.7h-29.3c-1.5 13.5-10.5 30.8-33 30.8-20.5 0-35.3-14.2-49.5-35.8 44.2-34.2 74.7-87.5 74.7-153C403.5 111.2 306.8 32 205 32 105.3 32 7.3 111.7 7.3 228.7c0 134.1 131.3 221.6 249 189C276 451.3 302 480 351.5 480c81.8 0 90.8-75.3 89-93.3zM297 329.2C277.5 300 253.3 277 205.5 277c-30.5 0-54.3 10-69 22.8l12.2 24.3c6.2-3 13-4 19.8-4 35.5 0 53.7 30.8 69.2 61.3-10 3-20.7 4.2-32.7 4.2-75 0-107.5-53-107.5-156.7C97.5 124.5 130 71 205 71c76.2 0 108.7 53.5 108.7 157.7.1 41.8-5.4 75.6-16.7 100.5z"></path></svg>';
+$brandIcon              = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" role="img" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0,23.291h19.601v-2.978H2.98V3.689h16.626v10.911h-1.422l2.908,2.909L24,14.599 h-1.417V0.709H0V23.291z M16.148,13.356c-0.191-0.406-0.432-0.739-0.72-0.997c-0.287-0.258-0.599-0.454-0.933-0.583 c-0.337-0.132-0.641-0.217-0.916-0.254c0.251-0.034,0.496-0.134,0.735-0.296c0.241-0.161,0.455-0.364,0.647-0.609 c0.192-0.247,0.345-0.535,0.458-0.863c0.115-0.33,0.171-0.686,0.171-1.069c0-0.648-0.126-1.186-0.377-1.617 c-0.252-0.432-0.597-0.775-1.033-1.033c-0.436-0.258-0.948-0.44-1.536-0.547c-0.586-0.108-1.21-0.162-1.868-0.162 c-0.754,0-1.382,0.018-1.887,0.054C8.387,5.417,7.944,5.463,7.56,5.525v12.933c0.684,0.083,1.293,0.141,1.834,0.171 c0.539,0.03,1.082,0.044,1.634,0.044c0.718,0,1.404-0.054,2.057-0.162c0.652-0.107,1.227-0.304,1.723-0.592 c0.499-0.288,0.893-0.68,1.187-1.177c0.294-0.498,0.441-1.135,0.441-1.914C16.436,14.253,16.34,13.763,16.148,13.356z M10.165,7.321c0.91-0.111,1.873-0.054,2.301,0.304c0.38,0.317,0.607,0.599,0.607,1.42c0,0.751-0.357,1.195-0.608,1.356 c-0.251,0.161-0.59,0.368-1.403,0.368s-0.897,0-0.897,0V7.321z M13.194,16.001c-0.449,0.39-1.114,0.552-1.816,0.552 c-0.79,0-1.213-0.072-1.213-0.072v-3.737h1.132c0.711,0,1.438,0.126,1.832,0.464c0.509,0.437,0.611,0.895,0.611,1.505 C13.741,15.322,13.528,15.711,13.194,16.001z"></path></svg>';
+$orderIcon              = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M11.707 2.293A.997.997 0 0 0 11 2H6a.997.997 0 0 0-.707.293l-3 3A.996.996 0 0 0 2 6v5c0 .266.105.52.293.707l10 10a.997.997 0 0 0 1.414 0l8-8a.999.999 0 0 0 0-1.414l-10-10zM13 19.586l-9-9V6.414L6.414 4h4.172l9 9L13 19.586z"></path><circle cx="8.353" cy="8.353" r="1.647"></circle></svg>';
+$linkPlacement          = '<svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z"></path></svg>';
+$nicheIcon              = '<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 4h6v6h-6zm10 0h6v6h-6zm-10 10h6v6h-6zm10 3h6m-3 -3v6"></path></svg>';
+$invoiceIcon            = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 32 32" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M 6 3 L 6 29 L 26 29 L 26 9.5996094 L 25.699219 9.3007812 L 19.699219 3.3007812 L 19.400391 3 L 6 3 z M 8 5 L 18 5 L 18 11 L 24 11 L 24 27 L 8 27 L 8 5 z M 20 6.4003906 L 22.599609 9 L 20 9 L 20 6.4003906 z M 10 13 L 10 15 L 22 15 L 22 13 L 10 13 z M 10 18 L 10 20 L 17 20 L 17 18 L 10 18 z M 19 18 L 19 20 L 22 20 L 22 18 L 19 18 z M 10 22 L 10 24 L 17 24 L 17 22 L 10 22 z M 19 22 L 19 24 L 22 24 L 22 22 L 19 22 z"></path></svg>';
+$reportsIcon            = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M12 5.99 19.53 19H4.47L12 5.99M12 2 1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"></path></svg>';
+$groupIcon              = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"></path></svg>';
+$paymentMethodIcon      = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M482.9 410.3c0 6.8-4.6 11.7-11.2 11.7-6.8 0-11.2-5.2-11.2-11.7 0-6.5 4.4-11.7 11.2-11.7 6.6 0 11.2 5.2 11.2 11.7zm-310.8-11.7c-7.1 0-11.2 5.2-11.2 11.7 0 6.5 4.1 11.7 11.2 11.7 6.5 0 10.9-4.9 10.9-11.7-.1-6.5-4.4-11.7-10.9-11.7zm117.5-.3c-5.4 0-8.7 3.5-9.5 8.7h19.1c-.9-5.7-4.4-8.7-9.6-8.7zm107.8.3c-6.8 0-10.9 5.2-10.9 11.7 0 6.5 4.1 11.7 10.9 11.7 6.8 0 11.2-4.9 11.2-11.7 0-6.5-4.4-11.7-11.2-11.7zm105.9 26.1c0 .3.3.5.3 1.1 0 .3-.3.5-.3 1.1-.3.3-.3.5-.5.8-.3.3-.5.5-1.1.5-.3.3-.5.3-1.1.3-.3 0-.5 0-1.1-.3-.3 0-.5-.3-.8-.5-.3-.3-.5-.5-.5-.8-.3-.5-.3-.8-.3-1.1 0-.5 0-.8.3-1.1 0-.5.3-.8.5-1.1.3-.3.5-.3.8-.5.5-.3.8-.3 1.1-.3.5 0 .8 0 1.1.3.5.3.8.3 1.1.5s.2.6.5 1.1zm-2.2 1.4c.5 0 .5-.3.8-.3.3-.3.3-.5.3-.8 0-.3 0-.5-.3-.8-.3 0-.5-.3-1.1-.3h-1.6v3.5h.8V426h.3l1.1 1.4h.8l-1.1-1.3zM576 81v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V81c0-26.5 21.5-48 48-48h480c26.5 0 48 21.5 48 48zM64 220.6c0 76.5 62.1 138.5 138.5 138.5 27.2 0 53.9-8.2 76.5-23.1-72.9-59.3-72.4-171.2 0-230.5-22.6-15-49.3-23.1-76.5-23.1-76.4-.1-138.5 62-138.5 138.2zm224 108.8c70.5-55 70.2-162.2 0-217.5-70.2 55.3-70.5 162.6 0 217.5zm-142.3 76.3c0-8.7-5.7-14.4-14.7-14.7-4.6 0-9.5 1.4-12.8 6.5-2.4-4.1-6.5-6.5-12.2-6.5-3.8 0-7.6 1.4-10.6 5.4V392h-8.2v36.7h8.2c0-18.9-2.5-30.2 9-30.2 10.2 0 8.2 10.2 8.2 30.2h7.9c0-18.3-2.5-30.2 9-30.2 10.2 0 8.2 10 8.2 30.2h8.2v-23zm44.9-13.7h-7.9v4.4c-2.7-3.3-6.5-5.4-11.7-5.4-10.3 0-18.2 8.2-18.2 19.3 0 11.2 7.9 19.3 18.2 19.3 5.2 0 9-1.9 11.7-5.4v4.6h7.9V392zm40.5 25.6c0-15-22.9-8.2-22.9-15.2 0-5.7 11.9-4.8 18.5-1.1l3.3-6.5c-9.4-6.1-30.2-6-30.2 8.2 0 14.3 22.9 8.3 22.9 15 0 6.3-13.5 5.8-20.7.8l-3.5 6.3c11.2 7.6 32.6 6 32.6-7.5zm35.4 9.3l-2.2-6.8c-3.8 2.1-12.2 4.4-12.2-4.1v-16.6h13.1V392h-13.1v-11.2h-8.2V392h-7.6v7.3h7.6V416c0 17.6 17.3 14.4 22.6 10.9zm13.3-13.4h27.5c0-16.2-7.4-22.6-17.4-22.6-10.6 0-18.2 7.9-18.2 19.3 0 20.5 22.6 23.9 33.8 14.2l-3.8-6c-7.8 6.4-19.6 5.8-21.9-4.9zm59.1-21.5c-4.6-2-11.6-1.8-15.2 4.4V392h-8.2v36.7h8.2V408c0-11.6 9.5-10.1 12.8-8.4l2.4-7.6zm10.6 18.3c0-11.4 11.6-15.1 20.7-8.4l3.8-6.5c-11.6-9.1-32.7-4.1-32.7 15 0 19.8 22.4 23.8 32.7 15l-3.8-6.5c-9.2 6.5-20.7 2.6-20.7-8.6zm66.7-18.3H408v4.4c-8.3-11-29.9-4.8-29.9 13.9 0 19.2 22.4 24.7 29.9 13.9v4.6h8.2V392zm33.7 0c-2.4-1.2-11-2.9-15.2 4.4V392h-7.9v36.7h7.9V408c0-11 9-10.3 12.8-8.4l2.4-7.6zm40.3-14.9h-7.9v19.3c-8.2-10.9-29.9-5.1-29.9 13.9 0 19.4 22.5 24.6 29.9 13.9v4.6h7.9v-51.7zm7.6-75.1v4.6h.8V302h1.9v-.8h-4.6v.8h1.9zm6.6 123.8c0-.5 0-1.1-.3-1.6-.3-.3-.5-.8-.8-1.1-.3-.3-.8-.5-1.1-.8-.5 0-1.1-.3-1.6-.3-.3 0-.8.3-1.4.3-.5.3-.8.5-1.1.8-.5.3-.8.8-.8 1.1-.3.5-.3 1.1-.3 1.6 0 .3 0 .8.3 1.4 0 .3.3.8.8 1.1.3.3.5.5 1.1.8.5.3 1.1.3 1.4.3.5 0 1.1 0 1.6-.3.3-.3.8-.5 1.1-.8.3-.3.5-.8.8-1.1.3-.6.3-1.1.3-1.4zm3.2-124.7h-1.4l-1.6 3.5-1.6-3.5h-1.4v5.4h.8v-4.1l1.6 3.5h1.1l1.4-3.5v4.1h1.1v-5.4zm4.4-80.5c0-76.2-62.1-138.3-138.5-138.3-27.2 0-53.9 8.2-76.5 23.1 72.1 59.3 73.2 171.5 0 230.5 22.6 15 49.5 23.1 76.5 23.1 76.4.1 138.5-61.9 138.5-138.4z"></path></svg>';
+$couponIcon             = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 5H3a1 1 0 0 0-1 1v4h.893c.996 0 1.92.681 2.08 1.664A2.001 2.001 0 0 1 3 14H2v4a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-4h-1a2.001 2.001 0 0 1-1.973-2.336c.16-.983 1.084-1.664 2.08-1.664H22V6a1 1 0 0 0-1-1zM11 17H9v-2h2v2zm0-4H9v-2h2v2zm0-4H9V7h2v2z"></path></svg>';
+
+$sidebarData = [
+    [
+        'label'   => 'Admin',
+        'isGroup' => true,
+    ],
+    [
+        'label'      => 'Dashboard',
+        'canAccess'  => ['dashboard'],
+        'route'      => 'admin.dashboard',
+        'icon'       => $dashboardIcon,
+        'activeMenu' => 'dashboard',
+    ],
+    [
+        'label'      => 'Niche',
+        'canAccess'  => ['niche'],
+        'route'      => 'admin.niche',
+        'icon'       => $nicheIcon,
+        'activeMenu' => 'niche',
+    ],
+    [
+        'label'      => 'Websites',
+        'canAccess'  => ['sites'],
+        'route'      => 'admin.site-list',
+        'icon'       => $linkPlacement,
+        'activeMenu' => 'siteList',
+    ],
+    [
+        'label'      => 'Order',
+        'canAccess'  => ['order'],
+        'route'      => 'admin.order',
+        'icon'       => $orderIcon,
+        'activeMenu' => 'order',
+    ],
+    [
+        'label'      => 'Invoice',
+        'canAccess'  => ['invoice'],
+        'route'      => 'admin.invoice',
+        'icon'       => $invoiceIcon,
+        'activeMenu' => 'invoice',
+    ],
+    [
+        'label'      => 'Reports',
+        'canAccess'  => ['reports order report', 'reports invoice report', 'reports sites report'],
+        'icon'       => $reportsIcon,
+        'activeMenu' => 'reports',
+        'submenu'    => [
+            [
+                'label'         => 'Order Reports',
+                'canAccess'     => ['reports order report'],
+                'route'         => 'admin.reports',
+                'activeSubMenu' => 'counters',
+            ],
+            [
+                'label'         => 'Invoice Reports',
+                'canAccess'     => ['reports invoice report'],
+                'route'         => 'admin.reports.invoices',
+                'activeSubMenu' => 'invoices',
+            ],
+            [
+                'label'         => 'Sites Reports',
+                'canAccess'     => ['reports sites report'],
+                'route'         => 'admin.reports.sites',
+                'activeSubMenu' => 'sites',
+            ],
+            [
+                'label'         => 'Sites Summary Reports',
+                'canAccess'     => ['reports sites summary report'],
+                'route'         => 'admin.reports.sites-summary',
+                'activeSubMenu' => 'sites_summary',
+            ],
+            [
+                'label'         => 'Sites Selling Reports',
+                'canAccess'     => ['reports sites selling report'],
+                'route'         => 'admin.reports.sites-selling',
+                'activeSubMenu' => 'sites_selling',
+            ],
+            [
+                'label'         => 'Client Summary Reports',
+                'canAccess'     => ['reports client summary report'],
+                'route'         => 'admin.reports.client-summary',
+                'activeSubMenu' => 'client_summary',
+            ],
+        ],
+    ],
+    [
+        'label'      => 'Mail Box',
+        'canAccess'  => ['mail my campaigns', 'mail mailing lists', 'mail email templates', 'mail email froms'],
+        'icon'       => $emailTemplateIcon,
+        'activeMenu' => 'mailBox',
+        'submenu'    => [
+            [
+                'label'         => 'My Campaigns',
+                'route'         => 'admin.email.campaign',
+                'canAccess'     => ['mail my campaigns'],
+                'activeSubMenu' => 'emailCampaign',
+            ],
+            [
+                'label'         => 'Mailing Lists',
+                'route'         => 'admin.email',
+                'canAccess'     => ['mail mailing lists'],
+                'activeSubMenu' => 'emailList',
+            ],
+            [
+                'label'         => 'Email Templates',
+                'route'         => 'admin.email.template',
+                'canAccess'     => ['mail email templates'],
+                'activeSubMenu' => 'emailTemplate',
+            ],
+            [
+                'label'         => 'Email From',
+                'route'         => 'admin.email.from',
+                'canAccess'     => ['mail email froms'],
+                'activeSubMenu' => 'emailFrom',
+            ],
+            [
+                'label'         => 'Image Manager',
+                'route'         => 'admin.email.images',
+                'canAccess'     => ['mail image manager'],
+                'activeSubMenu' => 'imageManager',
+            ],
+        ],
+    ],
+    [
+        'label'      => 'Payment Methods',
+        'canAccess'  => ['payment methods'],
+        'route'      => 'admin.payment-method',
+        'icon'       => $paymentMethodIcon,
+        'activeMenu' => 'paymentMethod',
+    ],
+    [
+        'label'      => 'Coupon',
+        'canAccess'  => ['coupons'],
+        'route'      => 'admin.coupon',
+        'icon'       => $couponIcon,
+        'activeMenu' => 'coupon',
+    ],
+
+    //Frontend Information Menu Here
+    [
+        'label'   => 'Website',
+        'isGroup' => true,
+    ],
+    [
+        'label'      => 'Inbox',
+        'canAccess'  => ['inbox'],
+        'route'      => 'admin.inbox',
+        'icon'       => $inboxIcon,
+        'activeMenu' => 'inbox',
+    ],
+    [
+        'label'      => 'Pages',
+        'canAccess'  => ['pages'],
+        'icon'       => $pagesIcon,
+        'activeMenu' => 'pages',
+        'submenu'    => [
+            [
+                'label'         => 'Home',
+                'route'         => 'admin.home-page',
+                'canAccess'     => ['pages'],
+                'activeSubMenu' => 'home-page',
+            ],
+            [
+                'label'         => 'About As',
+                'route'         => 'admin.about-us',
+                'canAccess'     => ['pages'],
+                'activeSubMenu' => 'about-us',
+            ],
+            [
+                'label'         => 'Websites',
+                'route'         => ['admin.page', 'websites'],
+                'canAccess'     => ['pages'],
+                'activeSubMenu' => 'websites',
+            ],
+            [
+                'label'         => 'Privacy Policy',
+                'route'         => ['admin.page', 'privacy-policy'],
+                'canAccess'     => ['pages'],
+                'activeSubMenu' => 'privacy-policy',
+            ],
+            [
+                'label'         => 'Terms of Service',
+                'route'         => ['admin.page', 'terms-of-service'],
+                'canAccess'     => ['pages'],
+                'activeSubMenu' => 'terms-of-service',
+            ],
+            [
+                'label'         => 'Refund Policy',
+                'route'         => ['admin.page', 'refund-policy'],
+                'canAccess'     => ['pages'],
+                'activeSubMenu' => 'refund-policy',
+            ],
+            [
+                'label'         => 'DMCA',
+                'route'         => ['admin.page', 'dmca'],
+                'canAccess'     => ['pages'],
+                'activeSubMenu' => 'dmca',
+            ]
+        ]
+    ],
+    [
+        'label'      => 'Services',
+        'canAccess'  => ['services'],
+        'route'      => 'admin.service',
+        'icon'       => $serviceIcon,
+        'activeMenu' => 'services',
+    ],
+    [
+        'label'      => 'Package',
+        'canAccess'  => ['package'],
+        'route'      => 'admin.package',
+        'icon'       => $pricingIcon,
+        'activeMenu' => 'package',
+    ],
+    [
+        'label'      => 'Blog',
+        'canAccess'  => ['blog'],
+        'route'      => 'admin.blog',
+        'icon'       => $blogIcon,
+        'activeMenu' => 'blogs',
+    ],
+    [
+        'label'      => 'Team',
+        'canAccess'  => ['team'],
+        'route'      => 'admin.teams',
+        'icon'       => $teamsIcon,
+        'activeMenu' => 'team',
+    ],
+    [
+        'label'      => 'Client Testimonial',
+        'canAccess'  => ['client testimonial'],
+        'route'      => 'admin.client-testimonial',
+        'icon'       => $clientTestimonialIcon,
+        'activeMenu' => 'clientTestimonial',
+    ],
+    [
+        'label'      => 'Why Choose Us',
+        'canAccess'  => ['why choose us'],
+        'route'      => 'admin.why-us',
+        'icon'       => $whyUsIcon,
+        'activeMenu' => 'why-us',
+    ],
+    [
+        'label'      => 'FAQ',
+        'canAccess'  => ['faq'],
+        'route'      => 'admin.faq',
+        'icon'       => $faqIcon,
+        'activeMenu' => 'faq',
+    ],
+    [
+        'label'      => 'Brand',
+        'canAccess'  => ['brand'],
+        'route'      => 'admin.brand',
+        'icon'       => $brandIcon,
+        'activeMenu' => 'brand',
+    ],
+    [
+        'label'      => 'Admins',
+        'canAccess'  => ['admins'],
+        'route'      => 'admin.user',
+        'icon'       => $usersIcon,
+        'activeMenu' => 'admin',
+    ],
+    [
+        'label'      => 'Role & Permission',
+        'canAccess'  => ['role and permission'],
+        'route'      => 'admin.role',
+        'icon'       => $usersIcon,
+        'activeMenu' => 'rolePermission',
+    ],
+    // [
+    //     'label' => 'Users',
+    //     'route' => 'admin.users',
+    //     'icon' => $usersIcon,
+    //     'activeMenu' => 'userList',
+    // ],
+    // [
+    //     'label'      => "Publisher",
+    //     'route'      => "admin.publisher",
+    //     'icon'       => $usersIcon,
+    //     'activeMenu' => "publisherList",
+    // ]
+];
+
+$activeMenu    = !empty($activeMenu) ? $activeMenu : '';
+$activeSubMenu = !empty($activeSubMenu) ? $activeSubMenu : '';
+?>
+
+
+<div id="sidebarScroll"
+    class="bg-[#232E51] text-[#97aac1] h-[calc(100vh_-_80px)] overflow-y-auto flex flex-col justify-between px-4">
+    <div class="grid gap-2">
+        @foreach ($sidebarData as $key => $row)
+        @if (!empty($row['isGroup']))
+        <div class="text-[#97aac1] uppercase font-medium text-sm px-6 my-4 tracking-wider font-syne">
+            {{ $row['label'] }}
+        </div>
+        @elseif (!empty($row['submenu']))
+        @if (canAccess(!empty($row['canAccess']) ? $row['canAccess'] : []))
+        <div>
+            <button type="button" class="[&[aria-expanded='true']]:bg-[#2F3A5F] [&[aria-expanded='true']>svg]:rotate-90 [&[aria-expanded='true']]:text-white w-full rounded-lg
+                hover:bg-[#2F3A5F] hover:text-white font-syne flex items-center justify-between px-6 py-3 transition
+                duration-75 group {{ $row['activeMenu'] == $activeMenu ? 'bg-[#2F3A5F] text-white' : '' }}"
+                aria-controls="{{ $row['activeMenu'] . '_' . $key }}"
+                aria-expanded="{{$row['activeMenu'] == $activeMenu ? 'true' : 'false'}}"
+                data-collapse-toggle="{{ $row['activeMenu'] . '_' . $key }}">
+
+                <div class="flex items-center gap-3.5">
+                    <span class="text-lg">{!! $row['icon'] !!}</span>
+                    {{ $row['label'] }}
+                </div>
+
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.2em"
+                    width="1.2em" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="none" d="M0 0h24v24H0V0z"></path>
+                    <path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+                </svg>
+            </button>
+
+            <ul id="{{ $row['activeMenu'] . '_' . $key }}"
+                class="py-2 space-y-2 {{ $row['activeMenu'] == $activeMenu ? 'block' : 'hidden' }}">
+                @foreach ($row['submenu'] as $subRow)
+                @if (canAccess(!empty($subRow['canAccess']) ? $subRow['canAccess'] : []))
+                <li>
+                    @php($subRoute = (is_array($subRow['route']) ? route($subRow['route'][0], $subRow['route'][1]) :
+                    route($subRow['route'])))
+
+                    <a href="{{ $subRoute }}"
+                        class="py-2 flex items-center group gap-3.5 font-syne px-8 rounded-lg {{ $subRow['activeSubMenu'] == $activeSubMenu ? 'active' : '' }} [&.active]:bg-[#2F3A5F] hover:bg-[#2F3A5F] hover:text-white [&.active]:text-white">
+                        <span class="size-1.5 rounded-full bg-[#97aac1] group-hover:bg-white"></span>
+                        {{ $subRow['label'] }}
+                    </a>
+                </li>
+                @endif
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        @else
+        @if (canAccess(!empty($row['canAccess']) ? $row['canAccess'] : []))
+        <a href="{{ route($row['route']) }}"
+            class="duration-300 {{ $row['activeMenu'] == $activeMenu ? 'bg-[#2F3A5F] text-white' : '' }} hover:bg-[#2F3A5F] hover:text-white flex items-center px-6 py-3 gap-3.5 rounded-lg font-syne">
+            <span class="text-lg">
+                {!! $row['icon'] !!}
+            </span>
+            {{ $row['label'] }}
+        </a>
+        @endif
+        @endif
+        @endforeach
+
+        <a href="{{ route('home') }}" target="_blank"
+            class="duration-300 bg-[#FFA301] text-white hover:bg-[#ffa201e1] flex items-center px-6 py-3 gap-3.5 rounded-lg">
+            <span class="text-lg">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em"
+                    width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M7.18,4,8.6,5.44,6.06,8h9.71a6,6,0,0,1,0,12h-2V18h2a4,4,0,0,0,0-8H6.06L8.6,12.51,7.18,13.92,2.23,9Z">
+                    </path>
+                </svg>
+            </span>
+            Go To Website
+        </a>
+
+        @if(canAccess(['settings']))
+        <a href="{{ route('admin.settings') }}"
+            class="duration-300 {{ $activeMenu == 'settings' ? 'bg-[#2F3A5F] text-white' : '' }} hover:bg-[#2F3A5F]  flex items-center px-6 py-3 gap-3.5 rounded-lg">
+            <span class="text-lg">
+                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                    stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                    </path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </span>
+            Settings
+        </a>
+        @endif
+
+        <a href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+            class="duration-300 flex items-center px-6 py-3 gap-3.5 hover:bg-[#2F3A5F] rounded-lg">
+            <span class="text-lg">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 256 256" height="1em"
+                    width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M116,128V48a12,12,0,0,1,24,0v80a12,12,0,0,1-24,0Zm66.55-82a12,12,0,0,0-13.1,20.1C191.41,80.37,204,103,204,128a76,76,0,0,1-152,0c0-25,12.59-47.63,34.55-61.95A12,12,0,0,0,73.45,46C44.56,64.78,28,94.69,28,128a100,100,0,0,0,200,0C228,94.69,211.44,64.78,182.55,46Z">
+                    </path>
+                </svg>
+            </span>
+            Logout
+        </a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
+
+</div>

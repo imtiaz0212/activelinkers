@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Syne:wght@400..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    /* font urbanist */
+    * {
+        font-display: swap;
+    }
+    body {
+        @apply font-inter text-bluegray;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-syne;
+    }
+}
+
+@layer components {
+    .header .nav-link {
+        @apply py-2 text-lg font-syne hover:text-primary text-darkblue;
+    }
+
+    .slider-hero {
+        @apply pt-20 pb-10 lg:pt-[166px] lg:pb-[136px] font-syne;
+    }
+    .hero-section {
+        @apply pt-20 lg:pt-[160px] sectionGap [background-size:50px] [background-image:repeating-linear-gradient(90deg,#121B2B_0_1px,transparent_1px_100%)]
+            before:absolute before:bg-secondary before:opacity-[.3] before:[filter:blur(172.5px)] before:w-[372px] before:-z-20 before:h-[372px] before:-left-[252px] before:-bottom-[257px]
+            bg-[#0B121F] z-10 overflow-hidden relative
+            after:absolute after:bg-secondary after:opacity-[.6] after:[filter:blur(172.5px)] after:w-[372px] after:-z-20 after:h-[372px] after:-right-[318px] after:-bottom-[130px];
+    }
+
+    .prose-list {
+        @apply prose-li:relative prose-li:pl-7 prose-li:after:absolute prose-li:after:left-0 prose-li:after:top-1/2 prose-li:after:-translate-y-1/2 prose-li:after:size-5 prose-li:after:bg-contain;
+    }
+
+    .sectionGap {
+        @apply py-12 md:py-16 lg:py-[100px];
+    }
+
+    .sectionDiv {
+        @apply text-center max-w-[689px] mx-auto mb-8 lg:mb-[52px];
+    }
+
+    .sectionTitle {
+        @apply font-syne font-semibold text-darkblue text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-1 [&>span]:text-secondary;
+    }
+
+    .serviceSubTitle {
+        @apply text-2xl md:text-4xl font-semibold mb-3;
+    }
+
+    .sectionSub {
+        @apply text-base font-medium uppercase tracking-wider text-primary;
+    }
+
+    .flexCenter {
+        @apply flex items-center justify-center;
+    }
+
+    .flexItemCenter {
+        @apply flex items-center;
+    }
+
+    .flexItemStart {
+        @apply flex items-start;
+    }
+
+    .flexItemEnd {
+        @apply flex items-end;
+    }
+
+    .flexBetween {
+        @apply flex items-center justify-between;
+    }
+
+    .primary-btn {
+        @apply relative z-[1] whitespace-nowrap font-medium shrink-0 text-lg overflow-hidden inline-flex cursor-pointer items-center justify-center rounded font-syne bg-primary px-3.5 py-2 text-white  after:absolute after:h-0 after:w-0 after:rounded-full after:bg-white after:opacity-10 after:z-[-1] after:transition-all after:duration-300 after:ease-out hover:after:h-80 hover:after:w-80;
+    }
+
+    .secondary-btn {
+        @apply primary-btn bg-darkblue;
+    }
+
+    .btnOutline {
+        @apply bg-transparent border-primary text-tertiary;
+    }
+
+    .inputField {
+        @apply border border-gray-300 w-full outline-none px-3 py-2 md:px-5 md:py-[14px] text-base text-bluegray rounded focus:[box-shadow:none];
+    }
+
+    .billingInputField {
+        @apply placeholder:text-[#C8C8C8] text-sm  border-[#D9D9D9] focus:ring-primary focus:border-primary rounded py-3 md:py-[14px] pl-3 md:pl-5 w-full;
+    }
+    .categoryItem:hover .bgWhite {
+        @apply fill-white;
+    }
+
+    .categoryItem:hover .bgWhite {
+        @apply stroke-white;
+    }
+
+    .caseTab {
+        @apply bg-[#1844CB]  text-lg rounded text-white border border-[#1844CB] py-2.5 px-10 relative z-[1] after:visible after:absolute after:left-[50%] after:translate-x-[-50%] after:-bottom-2 after:h-5 after:w-5 after:rounded-sm after:bg-[#1844CB] after:rotate-45 after:z-[-1];
+    }
+
+    .alert-danger {
+        @apply text-red-600 text-sm;
+    }
+
+    .navCollapseBtn {
+        @apply flex items-center w-full justify-between text-[#333333] hover:text-primary duration-300 font-medium;
+    }
+    .pricing-btn {
+        @apply flex items-center justify-center w-full py-[14px] mt-8 mb-7 border border-primary font-bold  text-[#212121] rounded-[100px] my-[42px] transition-all duration-500;
+    }
+
+    /* sitelist  */
+    .sitelist-dropdown {
+        @apply px-4 py-[15px] font-normal text-[#627193] rounded-lg border border-[#00005C80] focus:ring-0 focus:bg-darkblue focus:border-[#00005C80] focus:text-[#F1F1F1E5] cursor-pointer leading-[19px];
+    }
+
+    /* statictics part  */
+    .statictics-details {
+        @apply space-y-2 bg-white border-b-2 border-b-secondary rounded-md p-4 shadow-md md:space-y-4 [&_h2]:text-3xl md:[&_h2]:text-4xl lg:[&_h2]:text-5xl [&_h2]:font-semibold [&_h2_span]:text-primary  [&>span]:text-xl [&>span]:font-bold [&_p]:text-[#627193] [&_p]:mt-1 md:[&_p]:mt-3;
+    }
+
+    .footerNavTitle {
+        @apply relative text-2xl lg:text-3xl pb-1.5 text-white after:absolute after:bottom-0 after:left-0 after:w-24 after:h-0.5 after:rounded-lg after:bg-[linear-gradient(90deg,#ffffff_0.01%,rgba(255,255,255,0)_102%)];
+    }
+
+    .footerNavLink {
+        @apply relative font-normal text-white text-base md:text-lg gap-2 duration-300 hover:text-primary after:absolute after:-left-1 after:top-1/2 after:-translate-y-1/2 after:h-px after:w-2.5 after:bg-primary after:invisible after:opacity-0 after:duration-300 hover:pl-4 hover:after:visible hover:after:opacity-100 hover:after:left-0;
+    }
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
+    opacity: 0;
+}
+
+.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.showDrpDown {
+    max-height: 100vh;
+}
+
+.chevronUpDown {
+    rotate: 180deg;
+}
+/* header custom style  ends*/
+
+.swiper-slide.swiper-slide-active .bannerHeading {
+    transform: translateY(0px);
+}
+
+.swiper-slide .bannerHeading {
+    transition: 0.8s;
+    transform: translateY(50px);
+}
+
+.swiper-slide .bannerHeading span {
+    color: #ffc221;
+}
+input[type="radio"] {
+    color: black;
+}
+input[type="radio"]:focus {
+    border-color: black !important;
+    color: black !important;
+    box-shadow: none !important;
+}
+
+#dropdownHover ul li a {
+    color: black !important;
+}
+/* ========================================== */
+/* Badge Style */
+/* ========================================== */
+.badge {
+    @apply [--badge-color:#000000] inline-block px-2.5 py-1.5 text-xs bg-transparent border border-[var(--badge-color)] rounded-[20px] text-[var(--badge-color)] relative capitalize z-[1];
+}
+
+.badge.badge-primary {
+    --badge-color: #00a2ff;
+}
+
+.badge.badge-secondary {
+    --badge-color: #595959;
+}
+
+.badge.badge-success {
+    --badge-color: #09893f;
+}
+
+.badge.badge-danger {
+    --badge-color: #ff0000;
+}
+
+.badge.badge-warning {
+    --badge-color: #fda201;
+}
+
+.badge.badge-basic {
+    --badge-color: #0377a5;
+}
+
+.badge.badge-standard {
+    --badge-color: #9304be;
+}
+
+.badge.badge-premium {
+    --badge-color: #d85002;
+}
+.badge::after {
+    @apply absolute left-0 top-0 size-full bg-[var(--badge-color)] rounded-[20px] opacity-20 z-[-1];
+}
+
+/* table part from database  */
+.dataTables_wrapper {
+    @apply overflow-x-auto;
+}
+select:not([size]) {
+    @apply rounded-lg;
+}
+select:not([size]):focus {
+    @apply outline-none border-secondary;
+}
