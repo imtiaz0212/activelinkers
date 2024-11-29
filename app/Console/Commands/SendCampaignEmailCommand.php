@@ -19,7 +19,7 @@ class SendCampaignEmailCommand extends Command
      * The console command description.
      * @var string
      */
-    protected $description = 'Send 50 email after 1 minute.';
+    protected $description = 'Send 40 email after 1 minute.';
 
     /**
      * Execute the console command.
@@ -32,6 +32,9 @@ class SendCampaignEmailCommand extends Command
             $campaignInfo = EmailCampaign::where('id', $emailList[0]->email_campaign_id)->first();
 
             if (!empty($campaignInfo)) {
+                
+                $campaignInfo->increment('total_send', $emailList->count());
+                
                 $data = [
                     'subject'  => $campaignInfo->subject,
                     'template' => $campaignInfo->template,
@@ -49,7 +52,7 @@ class SendCampaignEmailCommand extends Command
                     //CampaignMailJob::dispatch($data, $campaignInfo)->onQueue('campaign');
                 }
 
-                EmailCamapignItems::where('status', 0)->limit(50)->update(['status' => 1]);
+                EmailCamapignItems::whereIn('id', $emailList->pluck('id'))->update(['status' => 1]);
 
                 echo 'Email send successful.';
             }else{

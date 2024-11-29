@@ -25,7 +25,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'ranklord_api_key'      => 'bW96c2NhcGUta2M4bUM3c01pWjpFWGlBeHhFOFFrU3M4WXdzbWFTZ1JTOXRvek9zcFZCcQ==',
+    'ranklord_api_key'      => 'Wj5li46QnHy5CNWbgQUSVwagp3lXTx6v',
 
     // send pulse api info
     'sendpulse_api_user_id' => '80ea48703a7b3c42bd9a1f0b0142bfb9',

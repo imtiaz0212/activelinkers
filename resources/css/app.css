@@ -82,6 +82,22 @@
         @apply flex items-center justify-between;
     }
 
+    .action-btn {
+        @apply h-8 w-8 rounded cursor-pointer duration-300 flex items-center justify-center;
+    }
+
+    .edit-action-btn {
+        @apply action-btn bg-green-600/20 text-green-600 hover:bg-green-600 hover:text-white;
+    }
+
+    .show-action-btn {
+        @apply action-btn bg-blue-600/20 text-blue-600 hover:bg-blue-600 hover:text-white;
+    }
+
+    .delete-action-btn {
+        @apply action-btn bg-red-600/20 text-red-600 hover:bg-red-600 hover:text-white;
+    }
+
     .primary-btn {
         @apply px-5 py-2 md:px-7 md:py-3 rounded cursor-pointer  text-black bg-primary duration-300  hover:text-white hover:border-tertiary hover:bg-tertiary flex items-center gap-2 relative z-[1] overflow-hidden whitespace-nowrap;
     }

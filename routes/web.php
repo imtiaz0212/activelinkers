@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InboxController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AdminUsersController;
@@ -394,12 +395,18 @@ Route::name('admin.')->group(function () {
             Route::post('/update', [FaqController::class, 'update'])->name('faq.update');
             Route::get('/destroy/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
         });
-        
+
         /* Inbox Routs */
         Route::prefix('/inbox')->group(function () {
             Route::get('/', [InboxController::class, 'index'])->name('inbox');
             Route::get('/show/{id}', [InboxController::class, 'show'])->name('inbox.show');
             Route::get('/destroy/{id}', [InboxController::class, 'destroy'])->name('inbox.destroy');
+        });
+
+        /* Newsletter Routs */
+        Route::prefix('/newsletter')->group(function () {
+            Route::get('/', [NewsletterController::class, 'index'])->name('newsletter');
+            Route::get('/destroy/{id}', [NewsletterController::class, 'destroy'])->name('newsletter.destroy');
         });
 
         /* Brand Routs */

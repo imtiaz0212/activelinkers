@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Classes\SendPulseApiClient;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -24,7 +23,6 @@ class CampaignMailJob implements ShouldQueue
     {
         $this->data = (object)$data;
         $this->emailFrom = (!is_array($campaignInfo) && isset($campaignInfo['email']) ? $campaignInfo['email'] : config('app.mail_from_address'));
-        $this->emailName = (!is_array($campaignInfo) && isset($campaignInfo['name']) ? $campaignInfo['name'] : getSiteInfo()->site_name);
     }
 
     /**

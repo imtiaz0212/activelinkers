@@ -5,7 +5,7 @@
 <div>
     <!-- Pages Header -->
     <div class="panelHeader">
-        <h3 class="panelHeaderTitle">Inbox</h3>
+        <h3 class="panelHeaderTitle">Newsletter</h3>
     </div>
 
     <!-- Blog Table -->
@@ -15,11 +15,9 @@
                 <tr>
                     <th>SL</th>
 
-                    <th>Full Name</th>
-
                     <th>Email</th>
 
-                    <th>Message</th>
+                    <th>Subscription Date</th>
 
                     <th class="!text-right">Action</th>
                 </tr>
@@ -27,25 +25,17 @@
             <tbody>
                 @if (!empty($results))
                 @foreach ($results as $key => $row)
-                <tr class="{{$row->seen == 0 ? '!bg-gray-100' : ''}}">
+                <tr>
                     <th>{{ ++$key }}</th>
-
-                    <td>{{ strFilter($row->first_name) }} {{ strFilter($row->last_name) }}</td>
 
                     <th>{{ $row->email }}</th>
 
-                    <td>{!! strLimit($row->message, 20) !!}</td>
+                    <td> {{ !empty($row->created) ? date('d F, Y', strtotime($row->created)) : '' }}</td>
 
                     <td>
                         <div class="flex items-center justify-end gap-1.5">
-                            @if (canAccess(['inbox show']))
-                            <a href="{{ route('admin.inbox.show', $row->id) }}" class="show-action-btn">
-                                <i class="fa-solid fa-eye"></i>
-                            </a>
-                            @endif
-
-                            @if (canAccess(['inbox destroy']))
-                            <a href="{{ route('admin.inbox.destroy', $row->id) }}"
+                            @if (canAccess(['newsletter destroy']))
+                            <a href="{{ route('admin.newsletter.destroy', $row->id) }}"
                                 onclick="return confirm('Do you want to delete this data?')" class="delete-action-btn">
                                 <i class="fa-regular fa-trash-can"></i>
                             </a>
