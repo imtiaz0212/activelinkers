@@ -26,27 +26,23 @@
         @if (canAccess(['mail mailing lists create campaign']))
             <div class="mb-4 px-4">
                 <div class="relative  shadow-sm border rounded mt-5 p-5">
-                    <form action="{{ route('admin.email.campaign.store') }}" method="post">
+                    <form id="formSubmit">
                         @csrf
 
                         <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3">
                             <div class="md:col-span-1">
-                                <select name="email_category_id" class="inputField" id="emailCategoryList"
-                                        onchange="getFilterData()">
+                                <select name="email_category_id" class="inputField" id="emailCategory">
                                     <option value="all" selected>All Category</option>
                                     @if (!empty($emailCategoryList))
                                         @foreach ($emailCategoryList as $row)
-                                            <option value="{{ $row->id }}"
-                                                    @if ($email_category_id==$row->id) selected @endif>{{
-                                $row->name }}
-                                            </option>
+                                            <option value="{{ $row->id }}">{{ $row->name }} </option>
                                         @endforeach
                                     @endif
                                 </select>
                             </div>
 
                             <div class="md:col-span-1">
-                                <select name="template_id" class="inputField" required>
+                                <select name="template_id" id="emailTemplate" class="inputField" required>
                                     <option value="">Select Mail Template (*)</option>
                                     @if (!empty($emailTemplateList))
                                         @foreach ($emailTemplateList as $row)
@@ -57,7 +53,7 @@
                             </div>
 
                             <div class="md:col-span-1">
-                                <select name="email_from_id" class="inputField" required>
+                                <select name="email_from_id" id="emailFrom" class="inputField" required>
                                     <option value="">Select Mail From (*)</option>
                                     @if (!empty($emailFromList))
                                         @foreach ($emailFromList as $row)
@@ -65,8 +61,6 @@
                                         @endforeach
                                     @endif
                                 </select>
-
-                                <div class="emailIdInput"></div>
                             </div>
 
 
@@ -316,7 +310,6 @@
             overflow-x: auto
         }
 
-
         #edit-modal button[data-modal-hide] {
             display: none
         }
@@ -326,7 +319,6 @@
 @push('footerPartial')
     <script>
         $(document).ready(function () {
-
             $('#dataTable thead').on('click', 'th', function () {
                 const index = table.column(this).index();
                 if (index === 0) {
@@ -340,7 +332,7 @@
                 ajax: {
                     url: "{{ route('admin.email') }}",
                     data: function (d) {
-                        d.e_c_id = $('#emailCategoryList').val();
+                        d.e_c_id = $('#emailCategory').val();
                     }
                 },
                 order: [[1, 'asc']],
@@ -360,26 +352,23 @@
 
             table.on('length.dt', function () {
                 $('#selectAll').prop('checked', false);
-                $(".emailIdInput").html("");
                 $(".sendButton").prop('disabled', true);
                 $(".totalEmail").html(0);
             });
 
             table.on('search.dt', function () {
                 $('#selectAll').prop('checked', false);
-                $(".emailIdInput").html("");
                 $(".sendButton").prop('disabled', true);
                 $(".totalEmail").html(0);
             });
 
             table.on('page', function () {
                 $('#selectAll').prop('checked', false);
-                $(".emailIdInput").html("");
                 $(".sendButton").prop('disabled', true);
                 $(".totalEmail").html(0);
             });
 
-            $('#emailCategoryList').on('change', function () {
+            $('#emailCategory').on('change', function () {
                 $('#selectAll').prop('checked', false);
                 table.ajax.reload();
             });
@@ -395,35 +384,59 @@
                     $('#selectAll').prop('checked', false);
                 }
             });
-        });
 
-        $('#dataTable').on('change', '.row-checkbox', function() {
-            if ($('.row-checkbox:checked').length == $('.row-checkbox').length) {
-                $('#selectAll').prop('checked', true);
-            } else {
-                $('#selectAll').prop('checked', false);
-            }
-            getCheckRecords();
+            $('#dataTable').on('change', '.row-checkbox', function () {
+                if ($('.row-checkbox:checked').length == $('.row-checkbox').length) {
+                    $('#selectAll').prop('checked', true);
+                } else {
+                    $('#selectAll').prop('checked', false);
+                }
+                getCheckRecords();
+            });
+
+            $('#formSubmit').on('submit', function (e) {
+                e.preventDefault();
+
+                let formData = new FormData(this);
+                let emailIds = getCheckRecords();
+                let action = "{{ route('admin.email.campaign.store') }}";
+                let successCallback = "{{ route('admin.email.campaign.success') }}";
+
+                formData.append('email_ids', JSON.stringify(emailIds));
+
+                if (emailIds.length > 0) {
+
+                    $.ajax({
+                        url: action,
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            if (response.success) {
+                                window.location.href = successCallback;
+                            }
+                        },
+                        error: function (xhr) {
+                            console.error('Error:', xhr.responseText);
+                        }
+                    });
+                }
+            });
         });
 
         function getCheckRecords() {
-            $(".emailIdInput").html("");
-            $(".sendButton").prop('disabled', true);
-            $(".totalEmail").html(0);
             let totalEmail = 0;
+            let emailIds = [];
             $('.row-checkbox:checked').each(function () {
-                const rec = "<input type='hidden' name='email_id[]' value='" + $(this).val() + "'>";
-                $(".emailIdInput").append(rec);
+                emailIds.push($(this).val());
                 totalEmail++;
             });
 
+            $(".sendButton").prop('disabled', totalEmail <= 0);
             $(".totalEmail").html(totalEmail);
 
-            if (totalEmail > 0) {
-                $(".sendButton").prop('disabled', false);
-            } else {
-                $(".sendButton").prop('disabled', true);
-            }
+            return emailIds;
         }
 
         async function getData(id) {

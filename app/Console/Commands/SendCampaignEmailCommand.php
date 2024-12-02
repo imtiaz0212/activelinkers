@@ -27,39 +27,43 @@ class SendCampaignEmailCommand extends Command
     public function handle()
     {
         $emailList = EmailCamapignItems::where('status', 0)->orderBy('id')->limit(50)->get();
-        if (!empty($emailList) && $emailList->isNotEmpty()) {
 
-            $campaignInfo = EmailCampaign::where('id', $emailList[0]->email_campaign_id)->first();
+        $groupedByCampaign = $emailList->groupBy('email_campaign_id');
 
-            if (!empty($campaignInfo)) {
-                
-                $campaignInfo->increment('total_send', $emailList->count());
-                
-                $data = [
-                    'subject'  => $campaignInfo->subject,
-                    'template' => $campaignInfo->template,
-                ];
+        if (!empty($groupedByCampaign)) {
+            foreach ($groupedByCampaign as $email_campaign_id => $emails) {
 
-                $campaignInfo=[
-                    'name' =>  $campaignInfo->email_name,
-                    'email' =>  $campaignInfo->email_from
-                ];
+                $campaignInfo = EmailCampaign::where('id', $email_campaign_id)->first();
 
-                foreach ($emailList as $row) {
-                    $data = array_merge($data, ['email' => $row->email]);
+                if (!empty($campaignInfo)) {
 
-                    CampaignMailJob::dispatch($data, $campaignInfo);
-                    //CampaignMailJob::dispatch($data, $campaignInfo)->onQueue('campaign');
+                    $campaignInfo->increment('total_send', $emails->count());
+
+                    $data = [
+                        'subject'  => $campaignInfo->subject,
+                        'template' => $campaignInfo->template,
+                    ];
+
+                    $campaignInfo = [
+                        'name'  => $campaignInfo->email_name,
+                        'email' => $campaignInfo->email_from
+                    ];
+
+                    foreach ($emails as $row) {
+                        $data = array_merge($data, ['email' => $row->email]);
+
+                        CampaignMailJob::dispatch($data, $campaignInfo);
+                    }
+
+                    EmailCamapignItems::whereIn('id', $emails->pluck('id'))->update(['status' => 1]);
+
+                    $this->info('Email send successful.');
+                }else{
+                    $this->info('Campaign not found.');
                 }
-
-                EmailCamapignItems::whereIn('id', $emailList->pluck('id'))->update(['status' => 1]);
-
-                echo 'Email send successful.';
-            }else{
-                echo 'Campaign not found.';
             }
-        }else{
-            echo 'Email list is empty.';
         }
+
+        $this->info('Email list is empty.');
     }
 }

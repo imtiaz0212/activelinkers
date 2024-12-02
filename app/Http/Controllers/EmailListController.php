@@ -7,7 +7,6 @@ use App\Models\EmailFrom;
 use App\Models\EmailList;
 use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 
 class EmailListController extends Controller
 {
@@ -33,42 +32,9 @@ class EmailListController extends Controller
         $this->data['emailTemplateList'] = EmailTemplate::templateList('', [1, 2, 3, 9]);
         $this->data['emailFromList']     = EmailFrom::emailList();
 
-        $where                           = [];
-        $this->data['email_category_id'] = 'all';
-        if (!empty($request->email_category_id)) {
-            $where[]                         = ['email_category_id', $request->email_category_id];
-            $this->data['email_category_id'] = $request->email_category_id;
-        }
-
         if ($request->ajax()) {
-
-            $query = EmailList::with('category');
-
-            if ($request->has('e_c_id') && $request->e_c_id !== 'all') {
-                $query->where('email_category_id', $request->e_c_id);
-            }
-
-            return DataTables::of($query)
-                ->addIndexColumn()
-                ->addColumn('checkbox', function ($row) {
-                    return '<input type="checkbox" class="row-checkbox" value="'. $row->id .'">';
-                })
-                ->addColumn('status_badge', function ($row) {
-                    return '<span class="badge ' . ($row->status == 1 ? ' badge-success' : 'badge-danger') . '">' . ($row->status == 1 ? 'Active' : 'Inactive') . ' </span>';
-                })
-                ->addColumn('action', function ($row) {
-                    return '<div class="flex items-center gap-2.5 justify-end">
-                                <a href="javascript:void(0)" data-modal-target="edit-modal" onclick="getData(' . $row->id . ');"
-                                        data-modal-toggle="edit-modal" class="edit-action-btn"><i class="fa-regular fa-pen-to-square"></i></a>
-                                <a href="' . route('admin.email.destroy', $row->id) . '" onclick="return confirm(\'Do you want to delete this data?\')"
-                                        class="delete-action-btn"><i class="fa-regular fa-trash-can"></i></a>
-                            </div>';
-                })
-                ->rawColumns(['checkbox', 'status_badge', 'action'])
-                ->make(true);
+            return EmailList::searchEmailList($request);
         }
-
-        //$this->data['results'] = EmailList::with('category')->where($where)->orderBy('id')->get();
 
         return view('mailbox.index', $this->data);
     }

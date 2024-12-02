@@ -115,7 +115,8 @@
 
 @push('footerPartial')
 <script>
-    const actionUrl = "{{route('admin.email.retry-all')}}";
+    const returnAllUrl = "{{route('admin.email.retry-all')}}";
+    const clearAllUrl = "{{route('admin.email.clear-all')}}";
         new DataTable('#dataTable', {
             info: false,
             paging: false,
@@ -127,7 +128,7 @@
                             text: 'Resend All',
                             attr: {class: 'button text-white', style: "background: green;padding: 5px 10px;float: left; margin-right: 10px" },
                             action: function (e, dt, node, config) {
-                                window.location = actionUrl;
+                                window.location = returnAllUrl;
                             }
                         },
 
@@ -135,7 +136,7 @@
                             text: 'Delete All',
                             attr: {class: 'button text-white', style: "background: red; padding: 5px 10px" },
                             action: function (e, dt, node, config) {
-                                window.location = actionUrl;
+                                window.location = clearAllUrl;
                             }
                         }
                     ]

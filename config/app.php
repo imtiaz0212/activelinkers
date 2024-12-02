@@ -16,9 +16,10 @@ return [
     |
     */
 
-    'name'              => env('APP_NAME', 'Active Linkers'),
+    'name' => env('APP_NAME', 'SEO Linkers'),
 
     'mail_from_address' => 'hello@activelinkers.com',
+    //'mail_from_address' => env('MAIL_FROM_ADDRESS', 'hello@activelinkers.com'),
 
     /*
     |--------------------------------------------------------------------------

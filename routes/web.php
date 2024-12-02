@@ -260,11 +260,12 @@ Route::name('admin.')->group(function () {
                 Route::get('/failed', [EmailCampaignController::class, 'failedMail'])->name('failed');
                 Route::get('/retry/{id}', [EmailCampaignController::class, 'retryMail'])->name('retry');
                 Route::get('/retry-all', [EmailCampaignController::class, 'retryAllMail'])->name('retry-all');
-                Route::get('/retry-clear', [EmailCampaignController::class, 'retryClear'])->name('retry-clear');
+                Route::get('/clear-all', [EmailCampaignController::class, 'clearAllMail'])->name('clear-all');
                 Route::get('/failed/destroy/{id}', [EmailCampaignController::class, 'failedDestroy'])->name('failed.destroy');
                 Route::get('/campaign', [EmailCampaignController::class, 'index'])->name('campaign');
                 Route::get('/campaign/create', [EmailCampaignController::class, 'create'])->name('campaign.create');
                 Route::post('/campaign/store', [EmailCampaignController::class, 'store'])->name('campaign.store');
+                Route::get('/campaign/success', [EmailCampaignController::class, 'success'])->name('campaign.success');
                 Route::post('/campaign/edit', [EmailCampaignController::class, 'edit'])->name('campaign.edit');
                 Route::post('/campaign/update', [EmailCampaignController::class, 'update'])->name('campaign.update');
                 Route::get('/campaign/destroy/{id}', [EmailCampaignController::class, 'destroy'])->name('campaign.destroy');

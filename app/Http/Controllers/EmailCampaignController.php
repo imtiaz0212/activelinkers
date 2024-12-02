@@ -31,19 +31,13 @@ class EmailCampaignController extends Controller
      */
     public function index()
     {
-        $this->data['results'] = EmailCampaign::orderByDesc('created')->get();
-
-        $emailList = EmailCamapignItems::with('campaign')->where('status', 1)->orderBy('id')->limit(10)->get();
-
-        //dd($emailList);
+        $this->data['results'] = EmailCampaign::orderByDesc('id')->get();
 
         $this->data['pendingMail'] = DB::table('jobs')->count();
         $this->data['failedMail']  = DB::table('failed_jobs')->count();
 
-
         return view('mailbox.campaign.index', $this->data);
     }
-
 
     /**
      * Pending email.
@@ -106,9 +100,9 @@ class EmailCampaignController extends Controller
     }
 
     /**
-     * Retry all email.
+     * remove all email.
      */
-    public function retryClear()
+    public function clearAllMail()
     {
         Artisan::call('queue:flush');
 
@@ -117,11 +111,14 @@ class EmailCampaignController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Remove the specified resource from storage.
      */
-    public function create()
+    public function failedDestroy($id)
     {
-        //
+        DB::table('failed_jobs')->where('id', $id)->delete();
+
+        flash()->addError('Failed email delete successful.', 'Delete');
+        return redirect()->route('admin.email.failed');
     }
 
     /**
@@ -129,9 +126,9 @@ class EmailCampaignController extends Controller
      */
     public function store(Request $request)
     {
-
-        $template  = EmailTemplate::find($request->template_id);
-        $emailFrom = EmailFrom::find($request->email_from_id);
+        $emailIdArray = array_map('intval', json_decode($request->email_ids, true));
+        $template     = EmailTemplate::find($request->template_id);
+        $emailFrom    = EmailFrom::find($request->email_from_id);
 
         $categoryName = ($request->email_category_id != 'all') ? EmailCategory::find($request->email_category_id)->name : 'All';
 
@@ -144,34 +141,33 @@ class EmailCampaignController extends Controller
         $data->subject       = $template->subject;
         $data->template_name = $template->name;
         $data->template      = $template->description;
-        $data->total_email   = count($request->email_id);
+        $data->total_email   = count($emailIdArray);
 
         $data->save();
 
-        $emailList = EmailList::whereIn('id', $request->email_id)->get();
-        if (!empty($request->email_id)) {
-            foreach ($request->email_id as $row) {
+        $emailList = EmailList::whereIn('id', $emailIdArray)->get();
+        if (!empty($emailIdArray)) {
+            foreach ($emailIdArray as $emailId) {
 
                 $itemInfo = new EmailCamapignItems;
 
                 $itemInfo->email_campaign_id = $data->id;
-                $itemInfo->email             = $emailList->where('id', $row)->first()->email;
+                $itemInfo->email             = $emailList->where('id', $emailId)->first()->email;
 
                 $itemInfo->save();
             }
         }
 
-
-        flash()->addSuccess('Campaign create successful.');
-        return redirect()->route('admin.email.campaign');
+        return response()->json(['message' => 'Campaign create successful.', 'success' => true], 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(EmailCampaign $emailCampaign)
+    public function success()
     {
-        //
+        flash()->addSuccess('Campaign create successful.', 'Success');
+        return redirect()->route('admin.email');
     }
 
     /**
@@ -201,16 +197,5 @@ class EmailCampaignController extends Controller
 
         flash()->addSuccess('Campaign delete successful.', 'Delete');
         return redirect()->route('admin.email.campaign');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function failedDestroy($id)
-    {
-        DB::table('failed_jobs')->where('id', $id)->delete();
-
-        flash()->addError('Failed email delete successful.', 'Delete');
-        return redirect()->route('admin.email.failed');
     }
 }
